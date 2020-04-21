@@ -1,6 +1,6 @@
 <template>
   <div>
-    <span v-for="(item, index) in new Array(5)" :key="index">
+    <span v-for="(_, index) in new Array(5)" :key="index">
       <span v-if="index <= rating - 1">
         <font-awesome-icon icon="star" />
       </span>
