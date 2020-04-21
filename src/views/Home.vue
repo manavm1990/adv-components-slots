@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <VSButton>Slot Content</VSButton>
+    <!-- Bind to treat '3' as JS Number -->
   </div>
 </template>
 
@@ -8,7 +8,7 @@
 export default {
   name: "Home",
   components: {
-    VSButton: () =>
+    VSRating: () =>
       import(
         /* webpackChunkName: "scoped" */ "@/components/scoped/home/VSButton"
       )
