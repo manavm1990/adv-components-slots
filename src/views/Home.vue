@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <VSButton />
+    <VSButton>Slot Content</VSButton>
   </div>
 </template>
 
