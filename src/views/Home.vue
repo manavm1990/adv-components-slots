@@ -5,13 +5,13 @@
 </template>
 
 <script>
-import VSButton from "@/components/scoped/home/VSButton";
-
 export default {
   name: "Home",
   components: {
-    VSButton,
+    VSButton: () =>
       import(
+        /* webpackChunkName: "scoped" */ "@/components/scoped/home/VSButton"
+      )
   }
 };
 </script>
