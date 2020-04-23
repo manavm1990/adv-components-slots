@@ -1,13 +1,13 @@
 <template>
   <div>
     <span v-for="(_, index) in new Array(5)" :key="index">
-      <span v-if="index <= rating - 1">
+      <span v-if="index <= roundedRating - 1">
         <slot name="filled">
           <font-awesome-icon icon="star" />
         </slot>
       </span>
 
-      <span v-else-if="rating - index === 0.5">
+      <span v-else-if="roundedRating - index === 0.5">
         <slot name="half-filled">
           <font-awesome-icon icon="star-half-alt" />
         </slot>
@@ -28,6 +28,11 @@ export default {
     rating: {
       type: Number,
       required: true
+    }
+  },
+  computed: {
+    roundedRating() {
+      return Math.round(this.rating * 2) / 2;
     }
   }
 };
