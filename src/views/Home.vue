@@ -1,7 +1,20 @@
 <template>
   <div class="home">
-    <!-- Bind to treat '3' as JS Number -->
-    <VSRating :rating="3" />
+    <VSRating :rating="4.75" />
+
+    <VSRating :rating="3.7">
+      <template #filled>
+        <font-awesome-icon icon="circle" />
+      </template>
+
+      <template id="half-filled">
+        <font-awesome-icon icon="adjust" />
+      </template>
+
+      <template #unfilled>
+        <font-awesome-icon :icon="['far', 'circle']" />
+      </template>
+    </VSRating>
   </div>
 </template>
 
