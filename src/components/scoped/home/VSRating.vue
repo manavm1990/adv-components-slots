@@ -1,6 +1,6 @@
 <template>
   <div>
-    <span v-for="(_, index) in new Array(5)" :key="index">
+    <span v-for="(_, index) in new Array(maxRating)" :key="index">
       <span v-if="index <= roundedRating - 1">
         <slot name="filled">
           <font-awesome-icon icon="star" />
@@ -25,6 +25,10 @@
 <script>
 export default {
   props: {
+    maxRating: {
+      type: Number,
+      default: 5
+    },
     rating: {
       type: Number,
       required: true

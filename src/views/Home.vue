@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <VSRating :rating="4.75" />
+    <VSRating :rating="11.7" :max-rating="15" />
 
     <VSRating :rating="3.7">
       <template #filled>
