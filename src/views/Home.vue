@@ -1,13 +1,13 @@
 <template>
   <div class="home">
-    <VSRating :rating="11.7" :max-rating="15" />
+    <VSRating :rating="1.7" />
 
     <VSRating :rating="3.7">
       <template #filled>
         <font-awesome-icon icon="circle" />
       </template>
 
-      <template id="half-filled">
+      <template #half-filled>
         <font-awesome-icon icon="adjust" />
       </template>
 
