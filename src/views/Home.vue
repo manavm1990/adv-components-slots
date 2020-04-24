@@ -1,19 +1,13 @@
 <template>
   <div class="home">
-    <VSRating :rating="1.7" />
-
-    <VSRating :rating="3.7">
-      <template #filled>
-        <font-awesome-icon icon="circle" />
-      </template>
-
-      <template #half-filled>
-        <font-awesome-icon icon="adjust" />
-      </template>
-
-      <template #unfilled>
-        <font-awesome-icon :icon="['far', 'circle']" />
-      </template>
+    <VSRating
+      v-slot="{ isFilled, isHalfFilled }"
+      :rating="8.7"
+      :max-rating="10"
+    >
+      <font-awesome-icon v-if="isFilled" icon="circle" />
+      <font-awesome-icon v-else-if="isHalfFilled" icon="adjust" />
+      <font-awesome-icon v-else :icon="['far', 'circle']" />
     </VSRating>
   </div>
 </template>
