@@ -1,23 +1,14 @@
 <template>
   <div>
     <span v-for="(_, index) in new Array(maxRating)" :key="index">
-      <span v-if="index <= roundedRating - 1">
-        <slot name="filled">
-          <font-awesome-icon icon="star" />
-        </slot>
-      </span>
+      <font-awesome-icon v-if="index <= roundedRating - 1" icon="star" />
 
-      <span v-else-if="roundedRating - index === 0.5">
-        <slot name="half-filled">
-          <font-awesome-icon icon="star-half-alt" />
-        </slot>
-      </span>
+      <font-awesome-icon
+        v-else-if="roundedRating - index === 0.5"
+        icon="star-half-alt"
+      />
 
-      <span v-else>
-        <slot name="unfilled">
-          <font-awesome-icon :icon="['far', 'star']" />
-        </slot>
-      </span>
+      <font-awesome-icon v-else :icon="['far', 'star']" />
     </span>
   </div>
 </template>
