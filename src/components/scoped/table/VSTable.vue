@@ -1,70 +1,67 @@
 <template>
-  <table v-if="items">
+  <table v-if="tableItems">
     <thead>
-      <th>Name</th>
-      <th>Stargazers</th>
-      <th>Language</th>
-      <th>Open Issues</th>
-      <th>Actions</th>
+      <th v-for="item in theadItems" :key="item.id">{{ item }}</th>
     </thead>
+
     <tfoot>
       <tr>
-        <td><strong>Totals</strong></td>
-        <td>{{ totalStargazers }}</td>
-        <td></td>
-        <td>{{ totalOpenIssues }}</td>
-        <td></td>
+        <slot name="tfoot" :tableItems="tableItems">
+          <td><strong>Totals</strong></td>
+        </slot>
       </tr>
     </tfoot>
+
     <tbody>
       <tr
-        v-for="item in items"
+        v-for="item in tableItems"
         :key="item.id"
         :class="`${item.highlighted ? 'highlighted' : 'normal'}`"
       >
-        <td>{{ item.name }}</td>
-        <td>{{ item.stargazers_count }}</td>
-        <td>{{ item.language }}</td>
-        <td>{{ item.open_issues }}</td>
-        <td>
-          <button @click="highlight(item)">Highlight</button>
-          <button @click="remove(item)">Remove</button>
-        </td>
+        <slot name="tbody" :item="item" :highlight="highlight" :remove="remove">
+          <!-- Default stuff if nothing specified in 'Table' -->
+          <td>{{ item.name }}</td>
+          <td>
+            <button @click="highlight(item)">Highlight</button>
+            <button @click="remove(item)">Remove</button>
+          </td>
+        </slot>
       </tr>
     </tbody>
   </table>
 </template>
 
 <script>
-import Vue from "vue";
+import Vue from "vue"
 
 export default {
   props: {
-    items: {
+    theadItems: {
       type: Array,
-      required: true
+      default: () => ["No head received! 😞"],
     },
-    totalOpenIssues: {
-      type: Number,
-      default: 0
+    tableItems: {
+      type: Array,
+      required: true,
     },
-    totalStargazers: {
-      type: Number,
-      default: 0
-    }
   },
   methods: {
     highlight(item) {
-      item.highlighted = !item.highlighted;
-      let index = this.items.findIndex(i => i.id === item.id);
-      Vue.set(this.items, index, item);
+      item.highlighted = !item.highlighted
+      Vue.set(
+        this.tableItems,
+        this.tableItems.findIndex((i) => i.id === item.id),
+        item
+      )
     },
     remove(item) {
-      let index = this.items.findIndex(i => i.id === item.id);
-      this.items.splice(index, 1);
-    }
-  }
-};
+      this.tableItems.splice(
+        this.tableItems.findIndex((i) => i.id === item.id),
+        1
+      )
+    },
+  },
+}
 </script>
 
 <style lang="scss" scoped>
