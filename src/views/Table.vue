@@ -7,6 +7,11 @@
     <template #thead.openIssues>
       Open Issues! <font-awesome-icon icon="dragon" />
     </template>
+
+    <template #tfoot.stargazersCount
+      >{{ sumBy(projects, "stargazers_count") }}
+    </template>
+    <template #tfoot.openIssues>{{ sumBy(projects, "open_issues") }} </template>
   </Table>
 </template>
 
