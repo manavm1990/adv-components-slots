@@ -1,8 +1,9 @@
 <template>
-  <table v-if="tableItems">
-    <thead>
-      <th v-for="item in theadItems" :key="item.id">{{ item }}</th>
-    </thead>
+  <table v-if="tData">
+    <slot name="thead">
+      <thead>
+        <th v-for="column in capitalizedColumns" :key="column.id">
+          <slot :name="`thead.${camelcaseProp(column)}`">
 
     <tfoot>
       <tr>
@@ -32,17 +33,28 @@
 </template>
 
 <script>
-import Vue from "vue"
+import camelcase from "lodash.camelcase"
+import capitalize from "lodash.capitalize"
 
 export default {
   props: {
-    theadItems: {
+    columns: {
       type: Array,
-      default: () => ["No head received! 😞"],
+      required: true,
     },
     tableItems: {
       type: Array,
       required: true,
+    },
+  },
+  computed: {
+    capitalizedColumns() {
+      return this.columns.map((column) =>
+        column
+          .split("_")
+          .map((c) => capitalize(c))
+          .join(" ")
+      )
     },
   },
   methods: {
@@ -53,6 +65,9 @@ export default {
         this.tableItems.findIndex((i) => i.id === item.id),
         item
       )
+    },
+    camelcaseProp(p) {
+      return camelcase(p)
     },
     remove(item) {
       this.tableItems.splice(

@@ -1,9 +1,7 @@
 <template>
-  <Table
-    v-if="projects.length"
-    :table-items="projects"
-    :thead-items="['Name', 'Stargazers', 'Language', 'Open Issues', 'Actions']"
-  >
+  <Table v-if="projects.length" :columns="columns" :t-data="projects">
+    <template #thead.stargazersCount>
+      <font-awesome-icon icon="star" />s
     <template #tfoot>
       <td><strong>Totals:</strong></td>
       <td>{{ sumBy(projects, "stargazers_count") }}</td>
@@ -36,6 +34,8 @@ export default {
   },
   data() {
     return {
+      // GitHub API property names
+      columns: ["name", "stargazers_count", "language", "open_issues"],
       username: "vuejs",
       projects: [],
     }

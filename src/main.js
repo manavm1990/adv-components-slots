@@ -8,7 +8,8 @@ import {
   faStar,
   faCircle,
   faAdjust,
-  faStarHalfAlt
+  faStarHalfAlt,
+  faDragon
 } from "@fortawesome/free-solid-svg-icons";
 import {
   faStar as farStar,
@@ -16,7 +17,15 @@ import {
 } from "@fortawesome/free-regular-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 
-library.add(faStar, farStar, faCircle, farCircle, faAdjust, faStarHalfAlt);
+library.add(
+  faStar,
+  farStar,
+  faCircle,
+  farCircle,
+  faAdjust,
+  faStarHalfAlt,
+  faDragon
+);
 
 Vue.component("font-awesome-icon", FontAwesomeIcon);
 
