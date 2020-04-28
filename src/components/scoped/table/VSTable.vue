@@ -18,6 +18,19 @@
         <slot :name="`tfoot.${camelcaseProp(column)}`">N/A</slot>
       </td>
     </tfoot>
+
+    <tbody>
+      <tr
+        v-for="td in tData"
+        :key="td.id"
+        :class="`${td.highlighted ? 'highlighted' : 'normal'}`"
+      >
+        <td>{{ td.name }}</td>
+        <td>{{ td.stargazers_count }}</td>
+        <td>{{ td.language }}</td>
+        <td>{{ td.open_issues }}</td>
+      </tr>
+    </tbody>
   </table>
 </template>
 
@@ -31,10 +44,10 @@ export default {
       type: Array,
       required: true
     },
-    tableItems: {
+    tData: {
       type: Array,
-      required: true,
-    },
+      required: true
+    }
   },
   computed: {
     capitalizedColumns() {
