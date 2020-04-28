@@ -10,6 +10,8 @@
 
     <template #tfoot.stargazersCount>{{ sumBy("stargazers_count") }}</template>
     <template #tfoot.openIssues>{{ sumBy("open_issues") }}</template>
+
+    <template #tbody />
   </Table>
 </template>
 
