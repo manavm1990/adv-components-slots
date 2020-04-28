@@ -26,10 +26,9 @@
           :key="td.id"
           :class="`${td.highlighted ? 'highlighted' : 'normal'}`"
         >
-          <td>{{ td.name }}</td>
-          <td>{{ td.stargazers_count }}</td>
-          <td>{{ td.language }}</td>
-          <td>{{ td.open_issues }}</td>
+          <td v-for="column in columns" :key="column.id">
+            {{ td[column] }}
+          </td>
         </tr>
       </tbody>
     </slot>
