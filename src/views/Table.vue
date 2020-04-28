@@ -8,10 +8,8 @@
       Open Issues! <font-awesome-icon icon="dragon" />
     </template>
 
-    <template #tfoot.stargazersCount
-      >{{ sumBy(projects, "stargazers_count") }}
-    </template>
-    <template #tfoot.openIssues>{{ sumBy(projects, "open_issues") }} </template>
+    <template #tfoot.stargazersCount>{{ sumBy("stargazers_count") }}</template>
+    <template #tfoot.openIssues>{{ sumBy("open_issues") }}</template>
   </Table>
 </template>
 
@@ -44,9 +42,10 @@ export default {
       )
       this.projects = results.data
     },
-    sumBy(a, property) {
       return sum(a.map((x) => x[property]))
     },
   },
-}
+    sumBy(property, d = this.projects) {
+      return sum(d.map(x => x[property]));
+    }
 </script>
