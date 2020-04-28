@@ -2,8 +2,13 @@
   <table v-if="tData">
     <slot name="thead">
       <thead>
-        <th v-for="column in capitalizedColumns" :key="column.id">
+        <th v-for="column in capitalizedColumns" :key="column.id" scope="col">
           <slot :name="`thead.${camelcaseProp(column)}`">
+            {{ column }}
+          </slot>
+        </th>
+      </thead>
+    </slot>
 
     <tfoot>
       <tr>
@@ -33,14 +38,14 @@
 </template>
 
 <script>
-import camelcase from "lodash.camelcase"
-import capitalize from "lodash.capitalize"
+import camelcase from "lodash.camelcase";
+import capitalize from "lodash.capitalize";
 
 export default {
   props: {
     columns: {
       type: Array,
-      required: true,
+      required: true
     },
     tableItems: {
       type: Array,
@@ -49,13 +54,13 @@ export default {
   },
   computed: {
     capitalizedColumns() {
-      return this.columns.map((column) =>
+      return this.columns.map(column =>
         column
           .split("_")
-          .map((c) => capitalize(c))
+          .map(c => capitalize(c))
           .join(" ")
-      )
-    },
+      );
+    }
   },
   methods: {
     highlight(item) {
@@ -67,7 +72,7 @@ export default {
       )
     },
     camelcaseProp(p) {
-      return camelcase(p)
+      return camelcase(p);
     },
     remove(item) {
       this.tableItems.splice(
