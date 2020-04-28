@@ -27,8 +27,11 @@
           :class="`${td.highlighted ? 'highlighted' : 'normal'}`"
         >
           <td v-for="column in columns" :key="column.id">
-            {{ td[column] }}
+            <template>
+              {{ td[column] }}
+            </template>
           </td>
+          <slot name="tbody.remove" :item="td.id" :remove="remove" />
         </tr>
       </tbody>
     </slot>
@@ -61,25 +64,18 @@ export default {
     }
   },
   methods: {
-    highlight(item) {
-      item.highlighted = !item.highlighted
-      Vue.set(
-        this.tableItems,
-        this.tableItems.findIndex((i) => i.id === item.id),
-        item
-      )
-    },
     camelcaseProp(p) {
       return camelcase(p);
     },
-    remove(item) {
-      this.tableItems.splice(
-        this.tableItems.findIndex((i) => i.id === item.id),
+    remove(itemID) {
+      // Find index of matching id and replace it with nothing (splice)
+      this.tData.splice(
+        this.tData.findIndex(element => element.id === itemID),
         1
-      )
-    },
-  },
-}
+      );
+    }
+  }
+};
 </script>
 
 <style lang="scss" scoped>

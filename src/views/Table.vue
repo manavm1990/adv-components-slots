@@ -12,6 +12,9 @@
     <template #tfoot.openIssues>{{ sumBy("open_issues") }}</template>
 
     <template #tbody />
+    <template #tbody.remove="{item, remove}">
+      <button @click="remove(item)">Remove</button>
+    </template>
   </Table>
 </template>
 
