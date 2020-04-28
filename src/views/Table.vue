@@ -2,28 +2,17 @@
   <Table v-if="projects.length" :columns="columns" :t-data="projects">
     <template #thead.stargazersCount>
       <font-awesome-icon icon="star" />s
-    <template #tfoot>
-      <td><strong>Totals:</strong></td>
-      <td>{{ sumBy(projects, "stargazers_count") }}</td>
-      <td>{{ sumBy(projects, "open_issues") }}</td>
     </template>
 
-    <template #tbody="{item, highlight, remove}">
-      <td>{{ item.name }}</td>
-      <td>{{ item.stargazers_count }} <font-awesome-icon icon="star" />s</td>
-      <td>{{ item.language }}</td>
-      <td>{{ item.open_issues }}</td>
-      <td>
-        <button @click="highlight(item)">Highlight</button>
-        <button @click="remove(item)">Remove</button>
-      </td>
+    <template #thead.openIssues>
+      Open Issues! <font-awesome-icon icon="dragon" />
     </template>
   </Table>
 </template>
 
 <script>
 import axios from "axios"
-import sum from "lodash.sum"
+import sum from "lodash.sum";
 
 export default {
   components: {

@@ -11,29 +11,13 @@
     </slot>
 
     <tfoot>
-      <tr>
-        <slot name="tfoot" :tableItems="tableItems">
-          <td><strong>Totals</strong></td>
-        </slot>
-      </tr>
+      <th scope="row">
+        Totals
+      </th>
+      <td v-for="column in capitalizedColumns" :key="column.id">
+        <slot :name="`tfoot.${camelcaseProp(column)}`">N/A</slot>
+      </td>
     </tfoot>
-
-    <tbody>
-      <tr
-        v-for="item in tableItems"
-        :key="item.id"
-        :class="`${item.highlighted ? 'highlighted' : 'normal'}`"
-      >
-        <slot name="tbody" :item="item" :highlight="highlight" :remove="remove">
-          <!-- Default stuff if nothing specified in 'Table' -->
-          <td>{{ item.name }}</td>
-          <td>
-            <button @click="highlight(item)">Highlight</button>
-            <button @click="remove(item)">Remove</button>
-          </td>
-        </slot>
-      </tr>
-    </tbody>
   </table>
 </template>
 
