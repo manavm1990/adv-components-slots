@@ -32,7 +32,7 @@ export default {
   data() {
     return {
       // GitHub API property names
-      columns: ["name", "stargazers_count", "language", "open_issues"],
+      columns: ["name", "stargazers_count", "language", "open_issues", "forks"],
       projects: [],
       username: "vuejs"
     };
