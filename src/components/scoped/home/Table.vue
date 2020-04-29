@@ -15,7 +15,9 @@
         Totals
       </th>
       <td v-for="column in capitalizedColumns" :key="column.id">
-        <slot :name="`tfoot.${camelcaseProp(column)}`">N/A</slot>
+        <slot :name="`tfoot.${camelcaseProp(column)}`">
+          N/A
+        </slot>
       </td>
     </tfoot>
 

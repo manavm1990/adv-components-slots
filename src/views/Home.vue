@@ -1,25 +1,55 @@
 <template>
-  <div class="home">
-    <VSRating
-      v-slot="{ isFilled, isHalfFilled }"
-      :rating="8.7"
-      :max-rating="10"
-    >
-      <font-awesome-icon v-if="isFilled" icon="circle" />
-      <font-awesome-icon v-else-if="isHalfFilled" icon="adjust" />
-      <font-awesome-icon v-else :icon="['far', 'circle']" />
-    </VSRating>
-  </div>
+  <Table v-if="projects.length" :columns="columns" :t-data="projects">
+    <template #thead.stargazersCount>
+      <font-awesome-icon icon="star" />s
+    </template>
+
+    <template #thead.openIssues>
+      Open Issues! <font-awesome-icon icon="dragon" />
+    </template>
+
+    <template #tfoot.stargazersCount>{{ sumBy("stargazers_count") }}</template>
+    <template #tfoot.openIssues>{{ sumBy("open_issues") }}</template>
+
+    <template #tbody />
+    <template #tbody.remove="{item, remove}">
+      <button @click="remove(item)">Remove</button>
+    </template>
+  </Table>
 </template>
 
 <script>
+import axios from "axios";
+import sum from "lodash.sum";
+
 export default {
-  name: "Home",
   components: {
-    VSRating: () =>
+    Table: () =>
       import(
-        /* webpackChunkName: "scoped" */ "@/components/scoped/home/VSRating"
+        /* webpackChunkName: "scoped" */ "@/components/scoped/home/Table.vue"
       )
+  },
+  data() {
+    return {
+      // GitHub API property names
+      columns: ["name", "stargazers_count", "language", "open_issues", "forks"],
+      projects: [],
+      username: "vuejs"
+    };
+  },
+  created() {
+    this.getData();
+  },
+  methods: {
+    async getData() {
+      const results = await axios.get(
+        `https://api.github.com/orgs/${this.username}/repos`
+      );
+      this.projects = results.data;
+    },
+    sumBy(property, d = this.projects) {
+      return sum(d.map(x => x[property]));
+    }
   }
 };
 </script>
