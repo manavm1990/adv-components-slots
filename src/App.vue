@@ -36,4 +36,10 @@ export default {
     }
   }
 }
+
+.screen-reader-text {
+  position: absolute;
+  top: -9999px;
+  left: -9999px;
+}
 </style>

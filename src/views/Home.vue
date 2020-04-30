@@ -1,31 +1,51 @@
 <template>
-  <Table v-if="projects.length" :columns="columns" :t-data="projects">
-    <template #thead.stargazersCount>
-      <rating>
-        <font-awesome-icon :icon="['far', 'star']" />
-      </rating>
-    </template>
+  <div>
+    <label for="username" class="screen-reader-text">GitHub Username</label>
+    <input v-model="username" id="username" placeholder="A GitHub Username" />
 
-    <template #thead.openIssues>
-      Open Issues! <font-awesome-icon icon="dragon" />
-    </template>
+    <DataLoader
+      :endpoint="`https://api.github.com/orgs/${this.username}/repos`"
+    >
+      <template #dataDisplay="{dataResults}">
+        <Table
+          v-if="dataResults.length"
+          :columns="columns"
+          :t-data="dataResults"
+        >
+          <template #thead.stargazersCount>
+            <rating>
+              <font-awesome-icon :icon="['far', 'star']" />
+            </rating>
+          </template>
 
-    <template #tfoot.stargazersCount>{{ sumBy("stargazers_count") }}</template>
-    <template #tfoot.openIssues>{{ sumBy("open_issues") }}</template>
+          <template #thead.openIssues>
+            Open Issues! <font-awesome-icon icon="dragon" />
+          </template>
 
-    <template #tbody />
-    <template #tbody.remove="{item, remove}">
-      <button @click="remove(item)">Remove</button>
-    </template>
-  </Table>
+          <template #tfoot.stargazersCount>{{
+            sumBy("stargazers_count")
+          }}</template>
+          <template #tfoot.openIssues>{{ sumBy("open_issues") }}</template>
+
+          <template #tbody />
+          <template #tbody.remove="{item, remove}">
+            <button @click="remove(item)">Remove</button>
+          </template>
+        </Table>
+      </template>
+    </DataLoader>
+  </div>
 </template>
 
 <script>
-import axios from "axios";
 import sum from "lodash.sum";
 
 export default {
   components: {
+    DataLoader: () =>
+      import(
+        /* webpackChunkName: "scoped" */ "@/components/scoped/home/DataLoader.vue"
+      ),
     Rating: () =>
       import(
         /* webpackChunkName: "scoped" */ "@/components/scoped/home/Rating.vue"
@@ -39,21 +59,12 @@ export default {
     return {
       // GitHub API property names
       columns: ["name", "stargazers_count", "language", "open_issues", "forks"],
-      projects: [],
+      dataResults: [],
       username: "vuejs"
     };
   },
-  created() {
-    this.getData();
-  },
   methods: {
-    async getData() {
-      const results = await axios.get(
-        `https://api.github.com/orgs/${this.username}/repos`
-      );
-      this.projects = results.data;
-    },
-    sumBy(property, d = this.projects) {
+    sumBy(property, d = this.dataResults) {
       return sum(d.map(x => x[property]));
     }
   }
