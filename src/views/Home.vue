@@ -1,7 +1,9 @@
 <template>
   <Table v-if="projects.length" :columns="columns" :t-data="projects">
     <template #thead.stargazersCount>
-      <font-awesome-icon icon="star" />s
+      <rating>
+        <font-awesome-icon :icon="['far', 'star']" />
+      </rating>
     </template>
 
     <template #thead.openIssues>
@@ -24,6 +26,10 @@ import sum from "lodash.sum";
 
 export default {
   components: {
+    Rating: () =>
+      import(
+        /* webpackChunkName: "scoped" */ "@/components/scoped/home/Rating.vue"
+      ),
     Table: () =>
       import(
         /* webpackChunkName: "scoped" */ "@/components/scoped/home/Table.vue"

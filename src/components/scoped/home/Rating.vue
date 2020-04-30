@@ -18,7 +18,7 @@ export default {
     },
     rating: {
       type: Number,
-      required: true
+      default: 5
     }
   },
   computed: {
