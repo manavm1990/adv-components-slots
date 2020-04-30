@@ -8,6 +8,7 @@
 
 <script>
 import axios from "axios";
+import debounce from "lodash.debounce";
 
 export default {
   components: {
@@ -29,6 +30,8 @@ export default {
   },
   created() {
     this.getData();
+
+    this.updateData = debounce(this.getData, 500);
   },
   methods: {
     async getData() {
@@ -41,11 +44,9 @@ export default {
     }
   },
   watch: {
-    endpoint() {
-      this.getData();
+    endpoint: function() {
+      this.updateData();
     }
   }
 };
 </script>
-
-<style lang="scss" scoped></style>
