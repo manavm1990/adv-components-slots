@@ -23,37 +23,32 @@
 .loading-spinner,
 .loading-spinner:before,
 .loading-spinner:after {
+  animation: load 1s infinite ease-in-out;
   background: #000;
-  -webkit-animation: load1 1s infinite ease-in-out;
-  animation: load1 1s infinite ease-in-out;
-  width: 1em;
   height: 4em;
+  width: 1em;
 }
 
 .loading-spinner {
+  animation-delay: -0.16s;
   color: #000;
-  text-indent: -9999em;
+  font-size: 11px;
   margin: 88px auto;
   position: relative;
-  font-size: 11px;
-  -webkit-transform: translateZ(0);
-  -ms-transform: translateZ(0);
+  text-indent: -9999em;
   transform: translateZ(0);
-  -webkit-animation-delay: -0.16s;
-  animation-delay: -0.16s;
 }
 
 .loading-spinner:before,
 .loading-spinner:after {
+  content: "";
   position: absolute;
   top: 0;
-  content: "";
 }
 
 .loading-spinner:before {
-  left: -1.5em;
-  -webkit-animation-delay: -0.32s;
   animation-delay: -0.32s;
+  left: -1.5em;
 }
 
 .loading-spinner:after {

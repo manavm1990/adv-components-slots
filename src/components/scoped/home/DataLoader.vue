@@ -1,6 +1,8 @@
 <template>
   <div>
-    <slot name="dataDisplay" :dataResults="dataResults" />
+    <slot name="dataDisplay" :dataResults="dataResults">
+      <Spinner />
+    </slot>
   </div>
 </template>
 
@@ -8,6 +10,12 @@
 import axios from "axios";
 
 export default {
+  components: {
+    Spinner: () =>
+      import(
+        /* webpackChunkName: "scoped" */ "@/components/scoped/home/Spinner"
+      )
+  },
   props: {
     endpoint: {
       type: String,
