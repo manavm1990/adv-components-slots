@@ -24,8 +24,12 @@ export default {
   },
   methods: {
     async getData() {
-      const results = await axios.get(this.endpoint);
-      this.dataResults = results.data;
+      try {
+        const results = await axios.get(this.endpoint);
+        this.dataResults = results.data;
+      } catch (error) {
+        console.error("404!");
+      }
     }
   },
   watch: {
