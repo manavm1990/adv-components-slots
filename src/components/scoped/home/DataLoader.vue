@@ -25,7 +25,7 @@ export default {
   },
   data() {
     return {
-      dataResults: []
+      dataResults: null,
     };
   },
   created() {
