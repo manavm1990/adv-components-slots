@@ -1,8 +1,7 @@
 <template>
   <div>
-    <slot name="dataDisplay" :dataResults="dataResults">
-      <Spinner />
-    </slot>
+    <div v-if="isLoading"><Loading /></div>
+    <slot v-else name="dataDisplay" :dataResults="dataResults" />
   </div>
 </template>
 
@@ -12,9 +11,9 @@ import debounce from "lodash.debounce";
 
 export default {
   components: {
-    Spinner: () =>
+    Loading: () =>
       import(
-        /* webpackChunkName: "scoped" */ "@/components/scoped/home/Spinner"
+        /* webpackChunkName: "scoped" */ "@/components/scoped/home/Loading"
       )
   },
   props: {
@@ -26,6 +25,7 @@ export default {
   data() {
     return {
       dataResults: null,
+      isLoading: false
     };
   },
   created() {
@@ -37,8 +37,10 @@ export default {
   methods: {
     async getData() {
       try {
+        this.isLoading = true;
         const results = await axios.get(this.endpoint);
         this.dataResults = results.data;
+        this.isLoading = false;
       } catch (error) {
         console.error("404!");
       }

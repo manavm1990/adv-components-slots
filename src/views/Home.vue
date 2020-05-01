@@ -7,11 +7,7 @@
       :endpoint="`https://api.github.com/orgs/${this.username}/repos`"
     >
       <template #dataDisplay="{dataResults}">
-        <Table
-          v-if="dataResults.length"
-          :columns="columns"
-          :t-data="dataResults"
-        >
+        <Table v-if="dataResults" :columns="columns" :t-data="dataResults">
           <template #thead.stargazersCount>
             <rating>
               <font-awesome-icon :icon="['far', 'star']" />
