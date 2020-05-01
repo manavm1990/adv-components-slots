@@ -6,6 +6,9 @@
     <DataLoader
       :endpoint="`https://api.github.com/orgs/${this.username}/repos`"
     >
+      <template #custom-loading-message>
+        Loading 💩 for GitHub User: {{ username }}
+      </template>
       <template #dataDisplay="{dataResults}">
         <Table v-if="dataResults" :columns="columns" :t-data="dataResults">
           <template #thead.stargazersCount>

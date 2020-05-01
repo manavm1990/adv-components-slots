@@ -1,6 +1,9 @@
 <template>
   <div>
-    <div v-if="isLoading"><Loading /></div>
+    <div v-if="isLoading">
+      <Loading />
+      <slot name="custom-loading-message" />
+    </div>
     <slot v-else name="dataDisplay" :dataResults="dataResults" />
   </div>
 </template>
