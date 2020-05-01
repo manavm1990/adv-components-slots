@@ -23,9 +23,11 @@
           </template>
 
           <template #tfoot.stargazersCount>{{
-            sumBy("stargazers_count")
+            sumBy("stargazers_count", dataResults)
           }}</template>
-          <template #tfoot.openIssues>{{ sumBy("open_issues") }}</template>
+          <template #tfoot.openIssues>{{
+            sumBy("open_issues", dataResults)
+          }}</template>
 
           <template #tbody />
           <template #tbody.remove="{item, remove}">
@@ -59,13 +61,12 @@ export default {
     return {
       // GitHub API property names
       columns: ["name", "stargazers_count", "language", "open_issues", "forks"],
-      dataResults: [],
       username: "vuejs"
     };
   },
   methods: {
-    sumBy(property, d = this.dataResults) {
-      return sum(d.map(x => x[property]));
+    sumBy(property, dataSet) {
+      return sum(dataSet.map(x => x[property]));
     }
   }
 };
