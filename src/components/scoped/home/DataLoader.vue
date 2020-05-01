@@ -4,6 +4,7 @@
       <Loading />
       <slot name="custom-loading-message" />
     </div>
+    <slot name="custom-error-message" v-else-if="error">{{ error }}</slot>
     <slot v-else name="dataDisplay" :dataResults="dataResults" />
   </div>
 </template>
@@ -28,6 +29,7 @@ export default {
   data() {
     return {
       dataResults: null,
+      error: "",
       isLoading: false
     };
   },
@@ -40,12 +42,15 @@ export default {
   methods: {
     async getData() {
       try {
+        this.error = "";
         this.isLoading = true;
         const results = await axios.get(this.endpoint);
         this.dataResults = results.data;
         this.isLoading = false;
       } catch (error) {
-        console.error("404!");
+        this.error = "Currently facing issue regarding this data";
+        console.error(error);
+        this.isLoading = false;
       }
     }
   },
