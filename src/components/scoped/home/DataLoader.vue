@@ -31,6 +31,7 @@ export default {
   created() {
     this.getData();
 
+    // Each instance of this component will have their own version of this to avoid any 'fights.'
     this.updateData = debounce(this.getData, 500);
   },
   methods: {
