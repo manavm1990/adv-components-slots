@@ -1,15 +1,24 @@
 <template>
-  <button class="btn">
+  <button :class="classes" v-on:click="$emit('handle-click')">
     <slot>Default</slot>
   </button>
 </template>
 
 <script>
-export default {};
+export default {
+  props: {
+    classes: {
+      type: Array,
+      default() {
+        return ["button"];
+      }
+    }
+  }
+};
 </script>
 
-<style lang="scss" module>
-button {
+<style lang="scss" scoped>
+.button {
   position: relative;
   padding: 15px;
   border-radius: 5px;
@@ -24,5 +33,13 @@ button {
     left: -3px;
     top: -3px;
   }
+}
+
+.pagination-button {
+  border-radius: 3px;
+  cursor: pointer;
+  font-size: 1em;
+  margin: 2px;
+  padding: 0.5rem;
 }
 </style>

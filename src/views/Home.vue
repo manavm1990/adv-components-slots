@@ -32,8 +32,9 @@
           }}</template>
 
           <template #tbody />
+
           <template #tbody.remove="{item, remove}">
-            <button @click="remove(item)">Remove</button>
+            <Button v-on:handle-click="remove(item)">Remove</Button>
           </template>
         </Table>
       </template>
@@ -46,6 +47,10 @@ import sum from "lodash.sum";
 
 export default {
   components: {
+    Button: () =>
+      import(
+        /* webpackChunkName: "scoped" */ "@/components/scoped/home/Button.vue"
+      ),
     DataLoader: () =>
       import(
         /* webpackChunkName: "scoped" */ "@/components/scoped/home/DataLoader.vue"
