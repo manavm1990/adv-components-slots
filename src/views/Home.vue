@@ -3,6 +3,8 @@
     <label for="username" class="screen-reader-text">GitHub Username</label>
     <input v-model="username" id="username" placeholder="A GitHub Username" />
 
+    <Pagination />
+
     <DataLoader
       :endpoint="`https://api.github.com/orgs/${this.username}/repos`"
     >
@@ -58,6 +60,10 @@ export default {
     Rating: () =>
       import(
         /* webpackChunkName: "scoped" */ "@/components/scoped/home/Rating.vue"
+      ),
+    Pagination: () =>
+      import(
+        /* webpackChunkName: "scoped" */ "@/components/scoped/home/Pagination.vue"
       ),
     Table: () =>
       import(
