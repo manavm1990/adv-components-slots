@@ -11,9 +11,11 @@
       <template #custom-loading-message>
         Loading 💩 for GitHub User: {{ username }}
       </template>
+
       <template #custom-error-message>
         Can't retrieve data for: {{ username }}
       </template>
+
       <template #dataDisplay="{dataResults}">
         <Table v-if="dataResults" :columns="columns" :t-data="dataResults">
           <template #thead.stargazersCount>
