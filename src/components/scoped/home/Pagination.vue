@@ -1,10 +1,10 @@
 <template>
   <div class="padding-row">
-    <button>Previous</button>
+    <Button>Previous</Button>
     <span v-for="(_, index) in new Array(10)" :key="index">
       <Button :classes="['pagination-button']">{{ index + 1 }}</Button>
     </span>
-    <button>Next</button>
+    <Button>Next</Button>
   </div>
 </template>
 
