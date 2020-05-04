@@ -19,17 +19,17 @@ export default {
 
 <style lang="scss" scoped>
 .button {
-  position: relative;
-  padding: 15px;
-  border-radius: 5px;
-  font-size: 20px;
   background-color: rgb(158, 195, 208);
   border-color: black;
+  border-radius: 3px;
   box-shadow: 2px 2px rgb(39, 39, 196);
   cursor: pointer;
+  margin: 0.25rem;
+  padding: 0.5rem;
+  position: relative;
 
   &:hover {
-    box-shadow: 5px 5px rgb(39, 39, 196);
+    box-shadow: 3px 3px rgb(39, 39, 196);
     left: -3px;
     top: -3px;
   }
